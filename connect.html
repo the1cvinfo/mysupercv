@@ -11,10 +11,7 @@
 
 
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
 <link href="bootstrap.min.css" rel="stylesheet">
@@ -138,43 +135,34 @@
     
     <p class="lead"> <img src="pin.gif" class="img-fluid" alt="Responsive image"></p>
     <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <form id="codeForm">
-        <div class="form-group">
-          <label for="code">Enter 4-Digit Code:</label>
-          <input type="text" class="form-control" id="code" maxlength="4" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-  </div>
+  <h2>Enter 4-digit code</h2>
+  <input type="text" id="codeInput" class="form-control" maxlength="4">
+  <button type="button" class="btn btn-primary mt-2" onclick="checkPage()">Check Page</button>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-  $('#codeForm').submit(function(e){
-    e.preventDefault();
-    var code = $('#code').val();
-    if(code.length === 4 && !isNaN(code)){
-      var url = "https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/";
-      $.ajax({
-        url: url,
-        type: 'HEAD',
-        error: function(){
-          window.location.href = "../start/start.html";
-        },
-        success: function(){
-          window.location.href = url;
-        }
-      });
-    } else {
-      alert("Please enter a valid 4-digit code.");
+function checkPage() {
+  var code = $('#codeInput').val();
+  if (code.length !== 4 || isNaN(code)) {
+    alert('Please enter a valid 4-digit code.');
+    return;
+  }
+  
+  var url = 'https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/' + code + '/';
+  
+  $.ajax({
+    url: url,
+    type: 'HEAD',
+    success: function() {
+      window.location.href = url;
+    },
+    error: function() {
+      window.location.href = 'https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/demo.html';
     }
   });
-});
+}
 </script>
-
     
   </main>
 
