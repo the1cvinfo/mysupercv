@@ -11,7 +11,7 @@
 
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 <link href="bootstrap.min.css" rel="stylesheet">
@@ -134,36 +134,30 @@
   <main class="px-3">
     
     <p class="lead"> <img src="pin.gif" class="img-fluid" alt="Responsive image"></p>
-    <div class="container mt-5">
-  <h2>..</h2>
-  <input type="text" id="codeInput" class="form-control" maxlength="4">
-  <button type="button" class="btn btn-primary mt-2" onclick="checkPage()">Check Page</button>
-</div>
+    < <input type="text" id="codeInput" placeholder="Enter 4-digit code">
+  <button onclick="checkPage()">Check Page</button>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-function checkPage() {
-  var code = $('#codeInput').val();
-  if (code.length !== 4 || isNaN(code)) {
-    alert('Please enter a valid 4-digit code.');
-    return;
-  }
-  
-  var url = 'https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/' + code + '/';
-  
-  $.ajax({
-    url: url,
-    type: 'HEAD',
-    success: function() {
-      window.location.href = url;
-    },
-    error: function() {
-      window.location.href = '../mysupercv/cvmaker/start.html';
+  <script>
+    function checkPage() {
+      var code = document.getElementById('codeInput').value;
+      if (code.length !== 4 || isNaN(code)) {
+        alert('Please enter a 4-digit numeric code.');
+        return;
+      }
+
+      var url = 'https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/' + code + '.html';
+      $.ajax({
+        url: url,
+        type: 'HEAD',
+        success: function () {
+          window.location.href = url;
+        },
+        error: function () {
+          window.location.href = 'https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/demo.html';
+        }
+      });
     }
-  });
-}
-</script>
-    
+  </script>
   </main>
 
   <footer class="mt-auto text-white-50">
