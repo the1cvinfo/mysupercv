@@ -157,12 +157,12 @@ $(document).ready(function(){
     e.preventDefault();
     var code = $('#code').val();
     if(code.length === 4 && !isNaN(code)){
-      var url = "https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/demo.html";
+      var url = "https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/";
       $.ajax({
         url: url,
         type: 'HEAD',
         error: function(){
-          window.location.href = "https://www.google.com";
+          window.location.href = "../start/start.html";
         },
         success: function(){
           window.location.href = url;
