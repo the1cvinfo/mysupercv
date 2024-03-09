@@ -11,7 +11,10 @@
 
 
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 <link href="bootstrap.min.css" rel="stylesheet">
@@ -137,31 +140,41 @@
     <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      
-      <div class="form-group">
-        <input type="text" class="form-control" id="codeInput" maxlength="4">
-      </div>
-      <button class="btn btn-primary" onclick="checkCode()">Submit</button>
+      <form id="codeForm">
+        <div class="form-group">
+          <label for="code">Enter 4-Digit Code:</label>
+          <input type="text" class="form-control" id="code" maxlength="4" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
   </div>
 </div>
 
 <script>
-  function checkCode() {
-    var code = document.getElementById('codeInput').value;
-    if (code.length === 4) {
-      // Check if the page exists
-      // For demonstration purposes, let's assume the page exists if the code is '1234'
-      if (code === '1234') {
-        window.location.href = 'existing_page.html'; // Replace 'existing_page.html' with the actual URL of the existing page
-      } else {
-        window.location.href = 'https://www.google.com';
-      }
+$(document).ready(function(){
+  $('#codeForm').submit(function(e){
+    e.preventDefault();
+    var code = $('#code').val();
+    if(code.length === 4 && !isNaN(code)){
+      var url = "https://the1cvinfo.github.io/mysupercv/access/cv/sa/cv/demo.html";
+      $.ajax({
+        url: url,
+        type: 'HEAD',
+        error: function(){
+          window.location.href = "https://www.google.com";
+        },
+        success: function(){
+          window.location.href = url;
+        }
+      });
     } else {
-      alert('Please enter a 4-digit code.');
+      alert("Please enter a valid 4-digit code.");
     }
-  }
+  });
+});
 </script>
+
     
   </main>
 
